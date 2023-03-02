@@ -5,22 +5,22 @@ from validations import Condition
 
 class Main:
     @classmethod
-    def get_data_type(self, file: BinaryIO):
+    def get_data_type(self, file_name: str) -> bool:
         checked = []
         for subclass in DataType.__subclasses__():
-            checked.append(subclass.check_type(file))
+            checked.append(subclass.check_type(file_name))
         return any(checked)
 
     @classmethod
-    def validate_file_format(cls, file) -> None:
-        if not cls.get_data_type(file):
+    def validate_file_format(cls, file_name: str) -> None:
+        if not cls.get_data_type(file_name):
             raise Exception("File Format is not correct!")
 
     @classmethod
-    def read_file(cls, file) -> Generator:
-        cls.validate_file_format(file)
+    def read_file(cls, file_name: str) -> BinaryIO:
+        cls.validate_file_format(file_name)
 
-        file = open(file, "r")
+        file = open(file_name, "r")
         return file
 
     @classmethod
