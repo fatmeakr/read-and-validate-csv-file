@@ -1,6 +1,10 @@
-from typing import BinaryIO, Generator
+
+import os
+from typing import BinaryIO
 from data_formats import DataType
 from validations import Condition
+
+FILENAME = os.path.abspath(os.path.dirname(__file__)) + "/10000_Sales_Records.csv"
 
 
 class Main:
@@ -35,8 +39,9 @@ class Main:
 
 
 def main():
-    file = Main.read_file('10000_Sales_Records.csv')
+    file = Main.read_file(FILENAME)
     Main.validate_dataset(file)
+    file.close()
 
 
 if __name__ == "__main__":
