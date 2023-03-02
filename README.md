@@ -1,5 +1,5 @@
 # open-close-principle
-this repository is a task for a mock interview. you can find the details bellow.
+this repository is a task for a mock interview. you can find the details below.
 
 
 
