@@ -16,7 +16,7 @@ class TestReadFile(unittest.TestCase):
         self.assertEqual(str(e.exception), "File Format is not correct!")
 
     def test_valid_test_case(self):
-        file = Main.read_file(self.TESTDATA_FILENAME)
+        file, file_type = Main.read_file(self.TESTDATA_FILENAME)
         self.assertEqual(type(file), type(self.test_file))
 
 
