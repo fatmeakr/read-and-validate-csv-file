@@ -9,6 +9,9 @@ class TestReadFile(unittest.TestCase):
     def setUp(self):
         self.test_file = open(self.TESTDATA_FILENAME, "r")
 
+    def tearDown(self):
+        self.test_file.close()
+
     def test_invalid_file_format(self):
         file_name = "myfile.png"
         with self.assertRaises(Exception) as e:
