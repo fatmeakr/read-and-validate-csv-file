@@ -11,7 +11,7 @@ class Condition(abc.ABC):
 
 
 class RegionCondition(Condition):
-    URL = "https://api.example.com"
+    URL = "https://api.example.com/"
 
     @classmethod
     def validate(cls, dataset: str, file_type) -> Union[None, str]:
@@ -24,12 +24,12 @@ class RegionCondition(Condition):
 
 
 class PriorityCondition(Condition):
-    URL = "https://api-priority.example.com"
+    URL = "https://api-priority.example.com/"
 
     @classmethod
     def validate(cls, dataset: str, file_type) -> Union[None, str]:
         priority_code = file_type.get_dataset(dataset)["priority_code"]
-        url = cls.URL + f"/{priority_code}"
+        url = cls.URL + f"{priority_code}"
         response = requests.get(url=url).json()
         if response == 0:
             return "Priority code does not exist."
