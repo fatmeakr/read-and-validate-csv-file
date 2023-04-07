@@ -1,4 +1,5 @@
 import abc
+import csv
 
 
 class DataType(abc.ABC):
@@ -26,6 +27,9 @@ class XLS(DataType):
     def get_dataset(self, dataset) -> dict:
         pass
 
+    def read_file(self, file):
+        pass
+
 
 class CSV(DataType):
     @classmethod
@@ -37,20 +41,31 @@ class CSV(DataType):
         if cls.check_type(file_name):
             return CSV()
 
-    def get_dataset(self, dataset) -> dict:
-        return {
-            "country_name": dataset.split(",")[1],
-            "priority_code": dataset.split(",")[4],
-            "region": dataset.split(",")[0],
-            "total_profit": dataset.split(",")[13],
-            "total_cost": dataset.split(",")[12],
-            "order_date": dataset.split(",")[5],
-            "ship_date": dataset.split(",")[7],
-            "units_sold": dataset.split(",")[8],
-            "unit_price": dataset.split(",")[9],
-            "total_revenue": dataset.split(",")[11],
-            "unit_cost": dataset.split(",")[10],
-        }
+    def get_dataset(self, csv_reader) -> dict:
+        line = 0
+        data = []
+        for row in csv_reader:
+            if line == 0:
+                line += 1
+            else:
+                line += 1
+                data.append({
+                    "country_name": row["Country"],
+                    "priority_code": row["Order Priority"],
+                    "region": row["Region"],
+                    "total_profit": row["Total Profit"],
+                    "total_cost": row["Total Cost"],
+                    "order_date": row["Order Date"],
+                    "ship_date": row["Ship Date"],
+                    "units_sold": row["Units Sold"],
+                    "unit_price": row["Unit Price"],
+                    "total_revenue": row["Total Revenue"],
+                    "unit_cost": row["Unit Cost"],
+                })
+        return data
+
+    def read_file(self, file):
+        return csv.DictReader(file)
 
 
 class XLSX(DataType):
@@ -64,4 +79,7 @@ class XLSX(DataType):
             return XLSX()
 
     def get_dataset(self, dataset) -> dict:
+        pass
+
+    def read_file(self, file):
         pass
