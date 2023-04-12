@@ -1,7 +1,4 @@
-# open-close-principle
-this repository is a task for an interview that I've shared here.It's out of any framework. you can find the details below.
-
-
+This repository is a python pure task.
 
 # Context
 Let's imagine that you are developing a web service for a customer. Your team started developing MVP recently.
